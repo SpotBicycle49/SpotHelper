@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "spothelper",
+  "version": "${version}",
+  "name": "SpotHelper",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/spothelper/icon.png",
+  "environment": "client",
+  "entrypoints": {},
+  "mixins": [
+    "spothelper.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
