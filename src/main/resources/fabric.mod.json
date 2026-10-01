@@ -3,8 +3,7 @@
   "id": "spothelper",
   "version": "${version}",
   "name": "SpotHelper",
-  "description": "Клиентский мод-помощник: автоинструмент, ESP и интеграция с HolyWorld Control для ивентов и шахт.",
-  "authors": [
+  "description": "Клиентский мод-помощник: умный выбор инструмента, визуальные метки и интеграция с HolyWorld Control для ивентов и шахт.",  "authors": [
     "SpotBicycle49"
   ],
   "contact": {

@@ -23,7 +23,7 @@ public class SpotHelperConfigScreen {
         ConfigEntryBuilder entry = builder.entryBuilder();
 
         // ========== Автоинструмент ==========
-        ConfigCategory autoTool = builder.getOrCreateCategory(new LiteralText("Автоинструмент"));
+        ConfigCategory autoTool = builder.getOrCreateCategory(new LiteralText("Умный выбор инструмента"));
 
         autoTool.addEntry(entry
                 .startBooleanToggle(new LiteralText("Включён"), cfg.isAutoToolEnabled())
@@ -33,7 +33,7 @@ public class SpotHelperConfigScreen {
                 .build());
 
         // ========== ESP ==========
-        ConfigCategory esp = builder.getOrCreateCategory(new LiteralText("ESP блоков"));
+        ConfigCategory esp = builder.getOrCreateCategory(new LiteralText("Визуальные метки"));
 
         esp.addEntry(entry
                 .startBooleanToggle(new LiteralText("ESP включён"), cfg.isEspEnabled())

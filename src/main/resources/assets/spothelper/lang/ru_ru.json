@@ -1,7 +1,7 @@
 {
   "key.spothelper.menu": "Меню SpotHelper",
-  "key.spothelper.toggle_auto_tool": "Автоинструмент",
-  "key.spothelper.toggle_esp": "ESP блоков",
-  "key.spothelper.add_esp_block": "Добавить блок в ESP",
+  "key.spothelper.toggle_auto_tool": "Умный выбор инструмента",
+  "key.spothelper.toggle_esp": "Визуальные метки",
+  "key.spothelper.add_esp_block": "Добавить блок в метки",
   "category.spothelper": "SpotHelper"
 }

@@ -28,18 +28,31 @@ public class SpotHelperClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // прошлый запуск умер при открытии GUI? - отключаем виновника автоматически
+        // Прошлый запуск умер при открытии GUI — автоматически включаем безопасный режим.
         boolean trippedFont = GuiGuard.takeTripped("font");
         boolean trippedCursor = GuiGuard.takeTripped("cursor");
+
         if (trippedFont || trippedCursor) {
-            if (trippedFont) SpotHelperConfig.INSTANCE.fancyText = 0;
-            if (trippedCursor) SpotHelperConfig.INSTANCE.customCursors = 0;
+            if (trippedFont) {
+                SpotHelperConfig.INSTANCE.fancyText = 0;
+            }
+
+            if (trippedCursor) {
+                SpotHelperConfig.INSTANCE.customCursors = 0;
+            }
+
             SpotHelperConfig.INSTANCE.save();
-            System.out.println("[SpotHelper] Прошлый запуск оборвался при открытии GUI (этап: "
-                    + (trippedFont ? "шрифт " : "") + (trippedCursor ? "курсор" : "")
-                    + "). Включён безопасный режим: fancyText=" + SpotHelperConfig.INSTANCE.fancyText
-                    + ", customCursors=" + SpotHelperConfig.INSTANCE.customCursors
-                    + ". Вернуть можно в config/spothelper.json.");
+
+            System.out.println(
+                    "[SpotHelper] Прошлый запуск оборвался при открытии GUI (этап: "
+                            + (trippedFont ? "шрифт " : "")
+                            + (trippedCursor ? "курсор" : "")
+                            + "). Включён безопасный режим: fancyText="
+                            + SpotHelperConfig.INSTANCE.fancyText
+                            + ", customCursors="
+                            + SpotHelperConfig.INSTANCE.customCursors
+                            + ". Вернуть можно в config/spothelper.json."
+            );
         }
 
         OPEN_MENU = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -50,27 +63,28 @@ public class SpotHelperClient implements ClientModInitializer {
         ));
 
         TOGGLE_AUTO_TOOL = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.spothelper.auto_tool",
+                "key.spothelper.toggle_auto_tool",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_G,
                 "category.spothelper"
         ));
 
         TOGGLE_ESP = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.spothelper.esp",
+                "key.spothelper.toggle_esp",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_H,
                 "category.spothelper"
         ));
 
         ADD_ESP_BLOCK = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.spothelper.esp_add",
+                "key.spothelper.add_esp_block",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_J,
                 "category.spothelper"
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+
             while (OPEN_MENU.wasPressed()) {
                 if (client.currentScreen == null) {
                     client.openScreen(new SpotHelperScreen(null));
@@ -80,71 +94,123 @@ public class SpotHelperClient implements ClientModInitializer {
             while (TOGGLE_AUTO_TOOL.wasPressed()) {
                 SpotHelperConfig.INSTANCE.autoTool =
                         SpotHelperConfig.INSTANCE.autoTool == 1 ? 0 : 1;
+
                 SpotHelperConfig.INSTANCE.save();
+
                 if (client.player != null) {
-                    client.player.sendMessage(new LiteralText(
-                            "§aSpotHelper: автоинструмент " +
-                                    (SpotHelperConfig.INSTANCE.isAutoToolEnabled() ? "§aВКЛ" : "§cВЫКЛ")
-                    ), true);
+                    client.player.sendMessage(
+                            new LiteralText(
+                                    "§aSpotHelper: Умный выбор инструмента "
+                                            + (SpotHelperConfig.INSTANCE.isAutoToolEnabled()
+                                            ? "§aВКЛ"
+                                            : "§cВЫКЛ")
+                            ),
+                            true
+                    );
                 }
             }
 
             while (TOGGLE_ESP.wasPressed()) {
                 SpotHelperConfig.INSTANCE.espEnabled =
                         SpotHelperConfig.INSTANCE.espEnabled == 1 ? 0 : 1;
+
                 SpotHelperConfig.INSTANCE.save();
+
                 if (client.player != null) {
-                    client.player.sendMessage(new LiteralText(
-                            "§aSpotHelper: ESP " +
-                                    (SpotHelperConfig.INSTANCE.isEspEnabled() ? "§aВКЛ" : "§cВЫКЛ")
-                    ), true);
+                    client.player.sendMessage(
+                            new LiteralText(
+                                    "§aSpotHelper: Визуальные метки "
+                                            + (SpotHelperConfig.INSTANCE.isEspEnabled()
+                                            ? "§aВКЛ"
+                                            : "§cВЫКЛ")
+                            ),
+                            true
+                    );
                 }
             }
 
             while (ADD_ESP_BLOCK.wasPressed()) {
-                if (client.player == null || client.world == null) continue;
-                HitResult hit = client.crosshairTarget;
-                if (hit == null || hit.getType() != HitResult.Type.BLOCK) {
-                    client.player.sendMessage(new LiteralText("§cСмотри на блок"), true);
+                if (client.player == null || client.world == null) {
                     continue;
                 }
-                BlockState state = client.world.getBlockState(((BlockHitResult) hit).getBlockPos());
+
+                HitResult hit = client.crosshairTarget;
+
+                if (hit == null || hit.getType() != HitResult.Type.BLOCK) {
+                    client.player.sendMessage(
+                            new LiteralText("§cСмотри на блок"),
+                            true
+                    );
+                    continue;
+                }
+
+                BlockState state = client.world.getBlockState(
+                        ((BlockHitResult) hit).getBlockPos()
+                );
+
                 Block block = state.getBlock();
                 String id = Registry.BLOCK.getId(block).toString();
 
                 boolean had = SpotHelperConfig.INSTANCE.espBlocks.contains(id);
+
                 SpotHelperConfig.INSTANCE.toggleEspBlock(block);
 
-                client.player.sendMessage(new LiteralText(
-                        had
-                                ? "§cESP: убран §f" + id
-                                : "§aESP: добавлен §f" + id
-                ), true);
+                client.player.sendMessage(
+                        new LiteralText(
+                                had
+                                        ? "§cВизуальные метки: убран §f" + id
+                                        : "§aВизуальные метки: добавлен §f" + id
+                        ),
+                        true
+                );
             }
 
             AutoToolHandler.tick(client);
             EventFlow.tick(client);
 
             long now = System.currentTimeMillis();
-            if (SpotHelperConfig.INSTANCE.isHolyWorldEventsAutoRefresh() && now >= nextHolyWorldPoll) {
-                nextHolyWorldPoll = now + Math.max(5, SpotHelperConfig.INSTANCE.holyWorldEventsInterval) * 1000L;
+
+            if (SpotHelperConfig.INSTANCE.isHolyWorldEventsAutoRefresh()
+                    && now >= nextHolyWorldPoll) {
+
+                nextHolyWorldPoll =
+                        now
+                                + Math.max(
+                                5,
+                                SpotHelperConfig.INSTANCE.holyWorldEventsInterval
+                        ) * 1000L;
+
                 API.refreshEvents(new HolyWorldApiClient.Callback() {
-                    @Override public void onSuccess(HolyWorldData.Snapshot snapshot) { }
-                    @Override public void onError(String message) { }
+                    @Override
+                    public void onSuccess(HolyWorldData.Snapshot snapshot) {
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                    }
                 });
             }
 
             if (now >= nextHolyWorldStatusPoll) {
                 nextHolyWorldStatusPoll = now + 8000L;
+
                 API.refreshStatus(new HolyWorldApiClient.Callback() {
-                    @Override public void onSuccess(HolyWorldData.Snapshot snapshot) { }
-                    @Override public void onError(String message) { }
+                    @Override
+                    public void onSuccess(HolyWorldData.Snapshot snapshot) {
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                    }
                 });
             }
         });
 
         WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> {
-            BlockEspRenderer.render(context.matrixStack(), context.tickDelta());
+            BlockEspRenderer.render(
+                    context.matrixStack(),
+                    context.tickDelta()
+            );
         });
     }
 }
