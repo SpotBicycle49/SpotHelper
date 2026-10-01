@@ -3,19 +3,36 @@
   "id": "spothelper",
   "version": "${version}",
   "name": "SpotHelper",
-  "description": "",
-  "authors": [],
-  "contact": {},
+  "description": "Клиентский мод-помощник: автоинструмент, ESP и интеграция с HolyWorld Control для ивентов и шахт.",
+  "authors": [
+    "SpotBicycle49"
+  ],
+  "contact": {
+    "homepage": "https://github.com/SpotBicycle49/SpotHelper",
+    "sources": "https://github.com/SpotBicycle49/SpotHelper",
+    "issues": "https://github.com/SpotBicycle49/SpotHelper/issues"
+  },
   "license": "All-Rights-Reserved",
   "icon": "assets/spothelper/icon.png",
   "environment": "client",
-  "entrypoints": {},
   "mixins": [
     "spothelper.mixins.json"
   ],
+  "entrypoints": {
+    "client": [
+      "com.spothelper.client.SpotHelperClient"
+    ],
+    "modmenu": [
+      "com.spothelper.client.ModMenuIntegration"
+    ]
+  },
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=0.14.0",
     "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "minecraft": "1.16.5",
+    "cloth-config2": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
   }
 }

@@ -1,13 +1,14 @@
 {
-  "required": true,
+  "required": false,
   "minVersion": "0.8",
   "package": "com.spothelper.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
+    "ClientPlayNetworkHandlerMixin"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   }
 }
