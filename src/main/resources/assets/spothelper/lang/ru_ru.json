@@ -1,7 +1,14 @@
 {
-  "key.spothelper.menu": "Меню SpotHelper",
-  "key.spothelper.toggle_auto_tool": "Умный выбор инструмента",
-  "key.spothelper.toggle_esp": "Визуальные метки",
-  "key.spothelper.add_esp_block": "Добавить блок в метки",
-  "category.spothelper": "SpotHelper"
+  "key.spothelper.menu": "Открыть меню SpotHelper",
+  "key.spothelper.toggle_minimap": "Переключить миникарту",
+  "key.spothelper.minimap_zoom_in": "Миникарта: приблизить",
+  "key.spothelper.minimap_zoom_out": "Миникарта: отдалить",
+  "key.spothelper.minimap_settings": "Настройки миникарты",
+  "key.spothelper.add_waypoint": "Добавить метку здесь",
+  "key.spothelper.open_waypoints": "Открыть метки",
+  "key.spothelper.open_account_switcher": "Сменить аккаунт",
+  "key.spothelper.toggle_shulker_lock": "Замок шалкера: вкл/выкл",
+  "key.spothelper.free_look": "Свободная камера в F5 (удерживать)",
+  "category.spothelper": "SpotHelper",
+  "key.category.spothelper.general": "SpotHelper"
 }

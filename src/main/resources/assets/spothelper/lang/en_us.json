@@ -1,0 +1,14 @@
+{
+  "key.spothelper.menu": "Open SpotHelper menu",
+  "key.spothelper.toggle_minimap": "Toggle Minimap",
+  "key.spothelper.minimap_zoom_in": "Minimap zoom in",
+  "key.spothelper.minimap_zoom_out": "Minimap zoom out",
+  "key.spothelper.minimap_settings": "Minimap settings",
+  "key.spothelper.add_waypoint": "Add waypoint here",
+  "key.spothelper.open_waypoints": "Open waypoints",
+  "key.spothelper.open_account_switcher": "Open account switcher",
+  "key.spothelper.toggle_shulker_lock": "Toggle shulker lock",
+  "key.spothelper.free_look": "Free look in F5 (hold)",
+  "category.spothelper": "SpotHelper",
+  "key.category.spothelper.general": "SpotHelper"
+}

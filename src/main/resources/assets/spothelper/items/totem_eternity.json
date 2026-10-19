@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "minecraft:item/totem_of_undying",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 11816191
+      }
+    ]
+  }
+}

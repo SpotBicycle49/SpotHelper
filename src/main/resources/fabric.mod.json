@@ -3,7 +3,8 @@
   "id": "spothelper",
   "version": "${version}",
   "name": "SpotHelper",
-  "description": "Клиентский мод-помощник: умный выбор инструмента, визуальные метки и интеграция с HolyWorld Control для ивентов и шахт.",  "authors": [
+  "description": "Клиентский мод-помощник для HolyWorld: миникарта, метки, HUD, звуки, защита продажи и шалкеров, события.",
+  "authors": [
     "SpotBicycle49"
   ],
   "contact": {
@@ -19,6 +20,7 @@
   ],
   "entrypoints": {
     "client": [
+      "com.spotcore.client.SpotCoreClient",
       "com.spothelper.client.SpotHelperClient"
     ],
     "modmenu": [
@@ -26,9 +28,9 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.14.0",
+    "fabricloader": ">=0.16.0",
     "fabric": "*",
-    "minecraft": "1.16.5",
+    "minecraft": "~1.21.11",
     "cloth-config2": "*"
   },
   "suggests": {

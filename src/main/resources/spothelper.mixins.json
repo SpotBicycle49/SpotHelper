@@ -2,11 +2,33 @@
   "required": false,
   "minVersion": "0.8",
   "package": "com.spothelper.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
   "client": [
-    "ClientPlayNetworkHandlerMixin"
+    "ClientPlayerInteractionManagerMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "ClientPlayNetworkHandlerCritMixin",
+    "ClientPlayNetworkHandlerLockMixin",
+    "MinecraftClientLockMixin",
+    "MinecraftClientAttackMixin",
+    "ClientPlayerEntitySwingMixin",
+    "MinecraftClientSessionMixin",
+    "ItemModelManagerMixin",
+    "MouseFreeLookMixin",
+    "EntityLookMixin",
+    "InGameHudCrosshairMixin",
+    "CameraFreeLookMixin",
+    "ZoomFovMixin",
+    "InventoryScreenMixin",
+    "OverlayTextureMixin",
+    "LivingEntityRendererMixin",
+    "ClientPlayerEntityNauseaMixin",
+    "GameRendererEffectsMixin",
+    "InGameHudEffectsMixin",
+    "GameOptionsEffectsMixin",
+    "LightmapTextureManagerMixin",
+    "LivingEntityEffectsMixin",
+    "PlayerEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 0

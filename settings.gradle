@@ -4,6 +4,9 @@ pluginManagement {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
+        mavenCentral()
         gradlePluginPortal()
     }
 }
+
+rootProject.name = 'SpotHelper 1 21 11 HW'
